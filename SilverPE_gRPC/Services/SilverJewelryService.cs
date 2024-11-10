@@ -126,6 +126,32 @@ namespace SilverPE_gRPC.Services
         [Authorize(Roles = "1")]
         public override async Task<UpdateSilverJewelryResponse> UpdateSilverJewelry(UpdateSilverJewelryRequest request, ServerCallContext context)
         {
+            if (string.IsNullOrWhiteSpace(request.Id))
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "SilverJewelryId is required"));
+            }
+
+            var namePattern = @"^[A-Z][a-zA-Z0-9]*(\s[A-Z][a-zA-Z0-9]*)*$";
+            if (!Regex.IsMatch(request.SilverJewelryName, namePattern))
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "SilverJewelryName is invalid. Each word must start with a capital letter."));
+            }
+
+            if (request.MetalWeight == null || request.Price == null || request.ProductionYear == null || request.CategoryId == null)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "All fields must be provided."));
+            }
+
+            if (request.Price < 0)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "Price must be greater than or equal to 0."));
+            }
+
+            if (request.ProductionYear < 1900)
+            {
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "ProductionYear must be greater than or equal to 1900."));
+            }
+
             var response = await _jewelryRepository.UpdateJewelry(request.Id, new SilverPE_Repository.Request.UpdateSilverJewerlyRequest
             {
                 SilverJewelryName = request.SilverJewelryName,
