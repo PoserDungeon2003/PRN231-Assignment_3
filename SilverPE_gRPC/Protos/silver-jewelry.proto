@@ -4,6 +4,10 @@ option csharp_namespace = "SilverPE_gRPC.Protos";
 
 service SilverJewelryProtos {
     rpc GetAllJewelry (GetAllJewelryRequest) returns (GetAllJewelryResponse);
+    rpc CreateSilverJewelry (CreateSilverJewelryRequest) returns (CreateSilverJewelryResponse);
+    rpc SearchByNameOrWeight(SearchRequest) returns (SearchResponse);
+    rpc UpdateSilverJewelry(UpdateSilverJewelryRequest) returns (UpdateSilverJewelryResponse);
+    rpc DeleteSilverJewelry(DeleteSilverJewelryRequest) returns (DeleteSilverJewelryResponse);
 }
 
 message GetAllJewelryRequest {}
@@ -21,4 +25,52 @@ message SilverJewelry {
 
 message GetAllJewelryResponse {
     repeated SilverJewelry jewelries = 1;
+}
+
+message CreateSilverJewelryRequest {
+    string silver_jewelry_id = 1;
+    string silver_jewelry_name = 2;
+    string silver_jewelry_description = 3;
+    double metal_weight = 4;
+    double price = 5;
+    int32 production_year = 6;
+    string category_id = 7;
+}
+
+message CreateSilverJewelryResponse {
+    bool success = 1;
+}
+
+message SearchRequest {
+    string search_value = 1;
+}
+
+message SearchResponse {
+    repeated SilverJewelry jewelries = 1;
+    bool success = 2;
+    string message = 3;
+}
+
+message UpdateSilverJewelryRequest {
+    string id = 1;
+    string silver_jewelry_name = 2;
+    string silver_jewelry_description = 3;
+    double metal_weight = 4;
+    double price = 5;
+    int32 production_year = 6;
+    string category_id = 7;
+}
+
+message UpdateSilverJewelryResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message DeleteSilverJewelryRequest {
+    string id = 1;
+}
+
+message DeleteSilverJewelryResponse {
+    bool success = 1;
+    string message = 2;
 }
