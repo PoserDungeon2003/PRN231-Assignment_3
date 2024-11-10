@@ -1,0 +1,88 @@
+﻿@page
+@model SilverPE_RazorPage.Pages.SilverPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" asp-for="Search" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">Search</button>
+        </div>
+    </div>
+</form>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].SilverJewelryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].SilverJewelryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].SilverJewelryDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].MetalWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].ProductionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SilverJewelry[0].Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SilverJewelry) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SilverJewelryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SilverJewelryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SilverJewelryDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetalWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SilverJewelryId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SilverJewelryId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SilverJewelryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

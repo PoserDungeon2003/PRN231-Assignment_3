@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "SilverPE_gRPC.Protos";
+
+service Account {
+    rpc Login (AccountLoginRequest) returns (AccountLoginResponse);
+}
+
+message AccountLoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message AccountLoginResponse {
+    string token = 1;
+    int32 id = 2;
+    string email = 3;
+    string full_name = 4;
+    int32 role = 5;
+    bool success = 6;
+    string message = 7;
+}
