@@ -99,6 +99,7 @@ new TokenRepository(secretKey, issuer, audience, durationInMinutes));
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
